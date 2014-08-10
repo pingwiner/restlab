@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /
+
+# Exclude directories from rewrite rules
+RewriteRule ^(css|img|js|fonts|assets) - [L]
+
+RewriteCond %{REQUEST_URI} api/.*
+RewriteRule . api_handler.php [L]
+
+RewriteCond %{REQUEST_METHOD} (PUT|DELETE)
+RewriteRule ^(.*)$ api_handler.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
